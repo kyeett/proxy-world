@@ -1,21 +1,40 @@
 
-
-
-
-## Minimal example of 
-
-
-Start standalone consul-template for testing
-$PWD should be a clone of https://github.com/avthart/docker-consul-template
-then /examples
+## Build docker
+1.
+build `nginx-consul-template`
+```bash
+docker build -t nginx-consul-template .
 ```
-docker run -v $PWD/:/tmp/ --entrypoint=bash -it avthart/consul-template
+
+2. 
+run `nginx-consul-template` docker
+```
+docker run  --rm -p 80:80 -it -v $PWD/:/tmp/ \
+            --name dyn-nginx \
+            nginx-consul-template \
+            -consul-addr=192.168.0.10:8500
 ```
 
 Add new service
 ```
-curl -X PUT -d '{"Datacenter": "dc1", "Node": "google", "Address": "www.google.com", "Service": {"Service": "search", "Port": 80}}' http://127.0.0.1:8500/v1/catalog/register
+curl -X PUT -d '{"Datacenter": "dc1", "Node": "google", "Address": "www.google.com", "Service": {"Service": "webby'$(( ( RANDOM % 200 ) + 1 ))'", "Port": 80}}' http://127.0.0.1:8500/v1/catalog/register
 ```
+
+
+# Misc
+
+
+## Minimal example of 
+
+Start standalone consul-template for testing
+```
+docker run -v $PWD/:/tmp/ --entrypoint=bash -it avthart/consul-template
+```
+
+```
+consul-template -consul-addr=192.168.0.10:8500 -template example.ctmpl -dry
+```
+
 
 **Template command**
 ```

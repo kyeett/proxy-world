@@ -14,4 +14,7 @@ RUN cd /tmp && \
     mv consul-template /bin/consul-template && \
     rm -rf /tmp
 
-ENTRYPOINT ["/bin/consul-template"]
+#ADD ./example.ctmpl
+ADD ./start-nginx-consul-template.sh ./
+
+ENTRYPOINT ["./start-nginx-consul-template.sh"]
