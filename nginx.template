@@ -3,15 +3,28 @@ events {
 }
 
 http {
+    upstream myapp1 {
+        server webserver_1:5000;server webserver_2:5000;
+    }
+
+    upstream myapp2 {
+        ${MY_APP_SERVERS}
+    }
+
     server {
         location /google/ {
             proxy_pass ${GOOGLE};
         }
 
+        location / {
+           proxy_pass http://myapp1;
+        }
+
         # Not working yet
-       location / {
-           proxy_pass ${WEBSERVER};
-       }
+        location /myapp/ {
+            rewrite ^/myapp/(.*) /$1 break;
+            proxy_pass http://myapp2;
+        }
 
         # Not working yet
         location /2/ {

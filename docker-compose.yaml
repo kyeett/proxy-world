@@ -11,7 +11,17 @@ services:
     command: /bin/bash -c "envsubst < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
     environment:
       - GOOGLE=http://www.google.com/
-      - WEBSERVER=http://webserver:5000
+      - WEBSERVER=http://webserver_1:5000
+      - MY_APP_SERVERS=server webserver_3:5000;server webserver_4:5000;
 
-  webserver:
+  webserver_1:
+    image: tigrlily/flask-trial
+
+  webserver_2:
+    image: tigrlily/flask-trial
+
+  webserver_3:
+    image: tigrlily/flask-trial
+
+  webserver_4:
     image: tigrlily/flask-trial
