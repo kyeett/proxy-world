@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  consul:
+    image: consul
+    command: agent -bootstrap-expect=1 -server -ui -client 0.0.0.0
+    ports:
+      - "8500:8500"
+      - "8600:8600"
+    expose:
+      - "8300"
+
+  # world-proxy:
+  #   image: nginx
+  #   ports:
+  #     - "80:80"
+  #   volumes:
+  #     - $PWD/nginx.template:/etc/nginx/nginx.template
+  #   command: /bin/bash -c "envsubst < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+  #   environment:
+  #     - GOOGLE=http://www.google.com/
+  #     - WEBSERVER=http://webserver_1:5000
+  #     - MY_APP_SERVERS=server webserver_3:5000;server webserver_4:5000;
+
+  webserver_1:
+    image: ubuntu
