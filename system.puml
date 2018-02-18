@@ -1,0 +1,23 @@
+
+@startuml
+
+cloud Internet
+
+package "localhost" {
+[NGNIX - proxy] -down-> Load_balancer
+  folder "Service 1" {
+    [S1:Instance 1]
+    [S1:Instance 2]
+  }
+  folder "Service 2" {
+    [S2:Instance 1]
+  }
+}
+
+Internet -down-> [NGNIX - proxy]   : ":81"
+Internet ..> [NGNIX - proxy]       : ":82"
+Load_balancer -down-> [S1:Instance 1] : ":8181"
+Load_balancer -down-> [S1:Instance 2] : ":8182"
+[NGNIX - proxy] ..> [S2:Instance 1] : ":8281"
+
+@enduml
