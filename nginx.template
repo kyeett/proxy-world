@@ -5,15 +5,20 @@ events {
 http {
     server {
         location /google/ {
-            proxy_pass http://www.google.com/;
+            proxy_pass ${GOOGLE};
         }
 
         # Not working yet
-        location / {
-            proxy_pass http://127.0.0.1:8080;
-        }
+       location / {
+           proxy_pass ${WEBSERVER};
+       }
 
         # Not working yet
+        location /2/ {
+            proxy_pass http://127.0.0.1:5000;
+        }
+
+       # Not working yet
         location /blog {
             rewrite ^/blog(.*) /$1 break;
             proxy_pass http://127.0.0.1:8181;

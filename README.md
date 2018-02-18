@@ -12,6 +12,12 @@ docker run  -p 80:80 --rm --name world-proxy \
             nginx
 ```
 
+docker run  -p 80:80 --rm --name world-proxy \
+            -v $(pwd)/nginx.conf:/etc/nginx/nginx.conf \
+            -v /var/run/docker.sock:/tmp/docker.sock:ro \
+            nginx
+
+
 ### Todos
 1. Proxy port on ngnix to another service
 2. Load balancing between two services
@@ -24,4 +30,5 @@ docker run  -p 80:80 --rm --name world-proxy \
 5. ~~Create github repo~~
 
 ## References
+[Using env variables in nginx conf](https://docs.docker.com/samples/library/nginx/)
 [online PlantUML editor](https://www.planttext.com/)

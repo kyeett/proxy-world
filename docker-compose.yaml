@@ -1,0 +1,17 @@
+version: '2'
+
+services:
+  world-proxy:
+    image: nginx
+    ports:
+      - "80:80"
+    volumes:
+      - $PWD/nginx.template:/etc/nginx/nginx.template
+#      - /var/run/docker.sock:/tmp/docker.sock:ro
+    command: /bin/bash -c "envsubst < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
+    environment:
+      - GOOGLE=http://www.google.com/
+      - WEBSERVER=http://webserver:5000
+
+  webserver:
+    image: tigrlily/flask-trial
