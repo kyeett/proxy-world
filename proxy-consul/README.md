@@ -1,12 +1,14 @@
+# NGINX-CONSUL-TEMPLATE
+Dynamic port forwarding using `nginx` and `consul`. When a service is started and it's service is added (or removed) in consul, `consul-template` will detect the change and reload the `nginx` conf file, creating dynamic forwarding to the right host.
 
-## Build docker
-1.
+![Overview of the system](nginx-consul-system.png)
+
+## Build and run the docker
 build `nginx-consul-template`
 ```bash
 docker build -t nginx-consul-template .
 ```
 
-2. 
 run `nginx-consul-template` docker
 ```
 docker run  --rm -p 80:80 -it -v $PWD/:/tmp/ \

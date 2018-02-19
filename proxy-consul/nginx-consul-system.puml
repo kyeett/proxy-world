@@ -1,0 +1,33 @@
+
+@startuml
+
+cloud Internet
+
+package "localhost" {
+
+database Consul
+[NGNIX - proxy] -right-> Consul
+
+}
+
+folder "HOST-1" {
+    [webapp1]
+}
+folder "HOST-2" {
+    [webapp2]
+    [my_web]
+}
+
+[NGNIX - proxy] --> [webapp1] : ":3001"
+[NGNIX - proxy] --> [webapp2] : ":4001"
+[NGNIX - proxy] --> [my_web] : ":5001"
+
+[webapp1] ..> Consul : pub
+[webapp2] ..> Consul : pub
+[my_web] ..> Consul : pub
+
+Internet --> [NGNIX - proxy]
+Internet --> [NGNIX - proxy]
+Internet --> [NGNIX - proxy]       : "  /webapp1/\n  /webapp2/\n/my_web/"
+
+@enduml
