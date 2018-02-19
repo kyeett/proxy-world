@@ -2,6 +2,9 @@
 
 Learning about `ngnix` and proxies, load balancing, etc.
 
+### Known bugs
+1. BUG #1: Infinite redirect from nginx to flask: `localhost redirected you too many times.`. Workaround exists.
+
 ### Todo:s
 9. `docker-compose` for `nginx-consul-template`
 13. Flask monitor file change

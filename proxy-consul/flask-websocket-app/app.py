@@ -1,9 +1,10 @@
+from pprint import pprint
 import re
 import polling
 import os
 import sys
 import time
-from flask import Flask, render_template
+from flask import Flask, render_template, make_response, request
 
 app = Flask(__name__)
 
@@ -45,6 +46,20 @@ def parse_nginx_conf(filename):
                 proxy_paths.append(match.group(0).strip()[1:])
 
     return proxy_paths
+
+# TODO: Bug #1: solve this in a nicer way
+@app.after_request
+def after(response):
+  # todo with response
+  pprint(request.__dict__)
+
+  print(response.status)
+  print(response.headers)
+  print(response.get_data())
+  return make_response(render_template('index.html',
+                           proxy_paths=proxy_paths,
+                           base_url=BASE_URL,
+                           title=TITLE))
 
 
 @app.route('/')

@@ -22,14 +22,16 @@ http {
 
     {{range services}}
     location /{{.Name}}/ {
+      rewrite ^/{{.Name}}(.*) /$1 break;
       proxy_pass http://{{.Name}}/;
     }
     {{end}}
 
-
-    location / {
-      proxy_pass http://localhost:{{ or (env "FLASK_PORT") "80" }};
-    }
+    {{ if env "BASE_APP_ADDR" }}
+      location / {
+        proxy_pass {{ env "BASE_APP_ADDR" }};
+      }
+    {{ end }}
 
   }
 }

@@ -20,11 +20,16 @@ docker run  --rm -p 80:80 -it -v $PWD/:/tmp/ \
 Add new service
 ```
 curl -X PUT -d '{"Datacenter": "dc1", "Node": "google", "Address": "www.google.com", "Service": {"Service": "webby'$(( ( RANDOM % 200 ) + 1 ))'", "Port": 80}}' http://127.0.0.1:8500/v1/catalog/register
+
+curl -X PUT -d '{"Datacenter": "dc1", "Node": "google", "Address": "192.168.0.10", "Service": {"Service": "deb'$(( ( RANDOM % 200 ) + 1 ))'", "Port": 8080}}' http://127.0.0.1:8500/v1/catalog/register
+
 ```
 
 
 # Misc
 
+## References
+[sharing files between dockers in dc](https://stackoverflow.com/questions/44284484/docker-compose-share-named-volume-between-multiple-containers)
 
 ## Minimal example of 
 

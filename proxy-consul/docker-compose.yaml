@@ -10,17 +10,28 @@ services:
     expose:
       - "8300"
 
-  # world-proxy:
-  #   image: nginx
-  #   ports:
-  #     - "80:80"
-  #   volumes:
-  #     - $PWD/nginx.template:/etc/nginx/nginx.template
-  #   command: /bin/bash -c "envsubst < /etc/nginx/nginx.template > /etc/nginx/nginx.conf && nginx -g 'daemon off;'"
-  #   environment:
-  #     - GOOGLE=http://www.google.com/
-  #     - WEBSERVER=http://webserver_1:5000
-  #     - MY_APP_SERVERS=server webserver_3:5000;server webserver_4:5000;
+  world-proxy:
+    image: nginx-consul-template
+    ports:
+      - "80:80"
+    volumes:
+      - $PWD/:/tmp/
+      - nginx-conf:/etc/nginx
+    # command: -consul-addr=192.168.0.10:8500
+    command: -consul-addr=consul:8500
+    environment:
+      - GOOGLE=http://www.google.com/
+      - BASE_APP_ADDR=http://webserver_1:5000
 
   webserver_1:
-    image: ubuntu
+    image: flask-websocket-app
+    ports:
+      - 5000:5000
+    volumes:
+      - nginx-conf:/etc/nginx:ro
+    environment:
+      - BASE_URL=http://localhost/
+      - FILENAME=/etc/nginx/nginx.conf
+
+volumes:
+     nginx-conf:
