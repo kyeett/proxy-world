@@ -24,7 +24,7 @@ services:
       - BASE_APP_ADDR=http://webserver_1:5000
 
   webserver_1:
-    image: flask-websocket-app
+    image: tigrlily/flask-websocket-app
     ports:
       - 5000:5000
     volumes:

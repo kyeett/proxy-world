@@ -47,22 +47,7 @@ def parse_nginx_conf(filename):
 
     return proxy_paths
 
-# TODO: Bug #1: solve this in a nicer way
-@app.after_request
-def after(response):
-  # todo with response
-  pprint(request.__dict__)
-
-  print(response.status)
-  print(response.headers)
-  print(response.get_data())
-  return make_response(render_template('index.html',
-                           proxy_paths=proxy_paths,
-                           base_url=BASE_URL,
-                           title=TITLE))
-
-
-@app.route('/')
+@app.route('/', strict_slashes=False)
 def home():
     return render_template('index.html',
                            proxy_paths=proxy_paths,

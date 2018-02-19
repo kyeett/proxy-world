@@ -1,7 +1,7 @@
 
 ```
 # Build docker
-docker build -t flask-websocket-app .
+docker build -t tigrlily/flask-websocket-app .
 
 # Run docker
 docker run  --rm \
