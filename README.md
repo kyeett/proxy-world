@@ -8,6 +8,7 @@ Learning about `ngnix` and proxies, load balancing, etc.
 10. Run flask app from nginx ([link](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04), [link2](https://github.com/tiangolo/uwsgi-nginx-flask-docker))
 11. Websocket flask app
 12. Create and push docker for simple web app
+13. Handle (or mark) Unhealthy services from consul
 
 ### Target system view
 ![Overview of the system](system.png)

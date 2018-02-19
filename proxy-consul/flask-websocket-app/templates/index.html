@@ -1,0 +1,6 @@
+<h1>{{ title }}</h1>
+<ul>
+    {% for path in proxy_paths %}
+        <li><a href="{{ base_url }}{{ path }}">/{{ path }}</a></li>
+    {% endfor %}
+</ul>
