@@ -5,11 +5,19 @@ Learning about `ngnix` and proxies, load balancing, etc.
 ### Known bugs
 
 ### Todo:s
-11. Websocket flask app
+**Release 0.2**
+
+1. Remove websocket_app.py with dependencies.
+12. Clean up building of html from updates
+12. Do some manual testing :-)
+13. ..
+
+**Release 0.x**
+
+1. Run flask app from nginx ([link](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04), [link2](https://github.com/tiangolo/uwsgi-nginx-flask-docker))
+13. Handle (or mark) Unhealthy services from consul
 13. Handle multiple services with same name
 14. Count multiple services with same name
-12. Run flask app from nginx ([link](https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-14-04), [link2](https://github.com/tiangolo/uwsgi-nginx-flask-docker))
-13. Handle (or mark) Unhealthy services from consul
 
 ### Target system view
 ![Overview of the system](system.png)
@@ -22,6 +30,9 @@ docker run  -p 80:80 --rm --name world-proxy \
 ```
 
 ### Done:s
+
+
+~~Release 0.1~~
 1. ~~Simple redirect to google~~
 3. ~~Plantuml for system~~
 5. ~~Create github repo~~
@@ -35,6 +46,8 @@ docker run  -p 80:80 --rm --name world-proxy \
 12. ~~Create and push docker for simple web app~~
 12. ~~Flask monitor file change~~
 13. ~~Make web app pretty~~
+11. ~~Websocket flask app~
+11. ~~Integrate websocket app with regular app~~
 
 ### Fixed bugs
 1. ~~BUG #1: Infinite redirect from nginx to flask: `localhost redirected you too many times.`. Workaround exists.~~ Fixed with`, strict_slashes=False` ([SO answer](https://stackoverflow.com/questions/21050320/flask-301-response))
@@ -42,7 +55,11 @@ docker run  -p 80:80 --rm --name world-proxy \
 
 
 ## References
+
 [Using env variables in nginx conf](https://docs.docker.com/samples/library/nginx/)
+
 [online PlantUML editor](https://www.planttext.com/)
+
 [Flask + SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
+
 [SocketIO example python](http://timmyreilly.azurewebsites.net/flask-socketio-and-more/) 
