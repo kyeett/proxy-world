@@ -38,7 +38,11 @@ docker run  -p 80:80 --rm --name world-proxy \
 
 ### Fixed bugs
 1. ~~BUG #1: Infinite redirect from nginx to flask: `localhost redirected you too many times.`. Workaround exists.~~ Fixed with`, strict_slashes=False` ([SO answer](https://stackoverflow.com/questions/21050320/flask-301-response))
+2. ~~BUG #2: SocketIO events sent from python thread didn't reach the browser and seems to break the manual sending.~~ Fixed with `socketio.start_background_task` instead of Thread`, and `eventlet.sleep` instead of `time.sleep` and `polling`. ([SO answer](https://stackoverflow.com/questions/43801884/how-to-run-python-socketio-in-thread))
+
 
 ## References
 [Using env variables in nginx conf](https://docs.docker.com/samples/library/nginx/)
 [online PlantUML editor](https://www.planttext.com/)
+[Flask + SocketIO](https://flask-socketio.readthedocs.io/en/latest/)
+[SocketIO example python](http://timmyreilly.azurewebsites.net/flask-socketio-and-more/) 

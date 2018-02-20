@@ -12,21 +12,19 @@ app = Flask(__name__)
 
 
 # Monitors a file, calls callback when "Last Changed" time is changed
-def monitor_file(filename, callback):
+def monitor_file(filename, callback, sleep_function=time.sleep):
     logging.info("Monitoring file '%s'" % filename)
 
     while True:
         try:
             # Poll until file "last changed" is changed
             last_change = os.stat(filename).st_mtime
-            polling.poll(
-                lambda: last_change != os.stat(filename).st_mtime,
-                step=1,
-                poll_forever=True)
+            while last_change == os.stat(filename).st_mtime:
+                sleep_function(1)
 
         except (IOError, FileNotFoundError) as e:
             logging.error("No such file: '%s'. Sleeping for 1 second." % filename)
-            time.sleep(1)
+            sleep_function.sleep(1)
             continue
 
         callback(filename)
