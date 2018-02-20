@@ -32,6 +32,20 @@ services:
     environment:
       - BASE_URL=http://localhost/
       - FILENAME=/etc/nginx/nginx.conf
+      - TITLE=WEBSERVER_1.0
+
+  webserver_2:
+    image: tigrlily/flask-websocket-app
+    ports:
+      - 6000:6000
+    volumes:
+      - nginx-conf:/etc/nginx:ro
+    environment:
+      - BASE_URL=http://localhost/
+      - FILENAME=/etc/nginx/nginx.conf
+      - PORT=6000
+      - TITLE=WEBSERVER_2.0
+
 
 volumes:
      nginx-conf:

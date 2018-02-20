@@ -1,6 +1,43 @@
-<h1>{{ title }}</h1>
-<ul>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Distributor</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<style type="text/css">
+
+body {
+    padding: 20px;
+}
+
+a.list-group-item, .list-group {
+    width: 300px;
+}
+
+a.list-group-item-action:hover {
+    background-color: #d9edf7
+}
+
+</style>
+
+</head>
+<body>
+
+<h1 class="display-3">{{ title }}</h1>
+<hr>
+<div class="list-group">
+    <a href="#" class="list-group-item active">
+    Services
+  </a>
     {% for path in proxy_paths %}
-        <li><a href="{{ base_url }}{{ path }}">/{{ path }}</a></li>
+        <a href="{{ base_url }}{{ path }}" class="list-group-item list-group-item-action">/{{ path }}</a>
     {% endfor %}
-</ul>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+</body>
+</html>
